@@ -1,23 +1,27 @@
-#include "niu_mini.h"
+
+#include QMK_KEYBOARD_H
+
 #include "action_layer.h"
-
-
 
 #define _BL 0
 // #define _QWERTY 2
 
 #define _FL1 1
 #define _FL2 2
-#define _FL3 3
-#define _NUM 4
-#define _LEFT 5
-#define _LEFT_NUM 6
-#define _LEFT2 7
-#define _PROGRAMMING 8
-#define _SHORTCUTS 9
-#define _MOUSE 10
-#define _FL1_clone 11
-#define _LED_SOUND 12
+
+#define _NUM 3
+
+#define _LEFT 4
+#define _LEFT_NUM 5
+#define _LEFT2 6
+// #define _right 6
+
+
+#define _PROGRAMMING 7
+#define _SHORTCUTS 8
+#define _MOUSE 9
+#define _FL1_clone 10
+#define _LED_SOUND 11
 
 
 #define _COPY LCMD(KC_C)
@@ -157,7 +161,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
-[_BL] = KEYMAP(
+[_BL] = LAYOUT(
   OSM(MOD_LALT)     , KC_Q, KC_D, KC_R, KC_W, KC_B,       KC_J, KC_F, KC_U   , KC_P  , S(LCMD(KC_F8)) , OSM(MOD_LGUI | MOD_LSFT),
   OSM(MOD_LGUI)     , KC_A, KC_S, KC_H, KC_T, KC_G,       KC_Y, KC_N, KC_E   , KC_O  , KC_I       , KC_MINS,
   LT(_LEFT, KC_ESC) , KC_Z, KC_V, KC_M, KC_C, KC_X,       KC_K, KC_L, KC_COMM, KC_DOT, KC_SLSH    , KC_LCTL,
@@ -165,49 +169,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ENT,  MO(_LEFT_NUM), LT(_LEFT2, KC_ESC),   LT(_PROGRAMMING, KC_TAB), LT(_SHORTCUTS, KC_SPC), MO(_FL1),   OSM(MOD_LSFT), LT(_NUM, KC_BSPC), LT(_MOUSE, KC_DEL), KC_APP, MO(_LED_SOUND), S(LCMD(KC_F9))
 ),
 
-[_FL1] = KEYMAP(
+[_FL1] = LAYOUT(
   KC_AMPR, KC_UNDS    , KC_LCBR, KC_RCBR     , TD(COPY_CUT)   , _PASTE ,        S(LCMD(KC_D)), S(LALT(KC_LEFT)) , KC_UP              , S(LALT(KC_RGHT)), _slctWord          , LCMD(KC_SLSH),
   KC_PIPE, KC_DLR     , KC_LPRN, KC_RPRN     , TD(TD_COL_SEMC), KC_EXLM,        LCMD(KC_LEFT), KC_LEFT          , KC_DOWN            , KC_RGHT         , LCMD(KC_RGHT)      , S(LALT(LCTL(KC_MINS))),
   KC_BSLS, TD(GT_RBRC), KC_LBRC, KC_EQL      , TD(QUO_DQUO)   , KC_QUES,        KC_COMM      , LALT(KC_LEFT)    , LCTL(LALT(KC_LEFT)), LALT(KC_RGHT)   , LCTL(LALT(KC_RGHT)), KC_LSFT,
-  _______, _______    , _______, KC_TAB      , S(KC_TAB)      , _______,        MO(_FL3)     , LT(_FL2, KC_BSPC), KC_SPC             , _______         , _______            , S(LALT(LCTL(KC_F12)))
+  _______, _______    , _______, KC_TAB      , S(KC_TAB)      , _______,        MO(_FL2)     , LT(_NUM, KC_BSPC), KC_SPC             , _______         , _______            , S(LALT(LCTL(KC_F12)))
 ),
 
-[_FL2] = KEYMAP(
+[_FL2] = LAYOUT(
   _______,     _______ ,   _______,   _______,   _______,    _______,         S(LALT(LCTL(KC_Z))), S(LALT(LCTL(KC_V))), S(KC_UP)  , S(LALT(LCTL(KC_X))), S(LALT(LCTL(KC_C))), _______,
   _______,     KC_TILDE,   KC_GRAVE ,   KC_AT  ,   KC_SCLN,    S(KC_3),       S(LCMD(KC_LEFT))    , S(KC_LEFT)          , S(KC_DOWN), S(KC_RGHT)          , S(LCMD(KC_RGHT))    , _______,
   _______,     KC_LT   ,   KC_CIRC,   KC_RBRC,   KC_DQT ,    _______,         S(LALT(LCTL(KC_Q))), _block_s_u          , _block_u  , _block_s_d          , _block_d            , _______,
   _______,     _______ ,   _______,   _______,   _______,    _______,         _______         , _______   , _______   , _______         , _______  , _______
 ),
 
-[_FL3] = KEYMAP(
-  _______,     _______,     _______,     _______,      _______,      _______,      S(LALT(KC_F1))  , S(LALT(KC_F2))  , S(LALT(KC_F3))   ,S(LALT(KC_F4)), S(LALT(KC_F5))  , _______,
-  _______,     _______,     _______,     _______,      _______,      _______,      S(LALT(KC_F6))  , S(LALT(KC_F7))  , S(LALT(KC_F8))   ,S(LALT(KC_F9)), S(LALT(KC_TAB)) , _______,
-  _______,     _______,     _______,     _______,      _______,      _______,      S(LALT(KC_F11)) , S(LALT(KC_F12)) , S(LALT(KC_TILDE)),S(LALT(KC_LT)), S(LALT(KC_CIRC)), _______,
-  _______,     _______,     _______,     _______,      _______,      _______,      _______,     _______,     _______,     _______,      _______,      _______
-), 
 
-[_SHORTCUTS] = KEYMAP(
+[_SHORTCUTS] = LAYOUT(
   LCTL(KC_F1), LCTL(KC_F2), LCTL(KC_F3) , LCTL(KC_F4) , LCTL(KC_F5) , LCTL(KC_F6)   ,  S(LALT(LCMD(KC_F1)))  , S(LALT(LCMD(KC_F2))) , S(LALT(LCMD(KC_F3)))   , S(LALT(LCMD(KC_F4))), S(LALT(LCMD(KC_F5)))  , _______, 
   LCTL(KC_F7), _SAVE      , _S_NO_FRMT  , _UNDO       , _REDO       , LCTL(KC_F8)   ,  S(LALT(LCMD(KC_F6)))  , S(LALT(LCMD(KC_F7))) , S(LALT(LCMD(KC_F8)))   , S(LALT(LCMD(KC_F9))), S(LALT(LCMD(KC_TAB))) , _______, 
   LCTL(KC_F9), LCMD(KC_W) , LCTL(KC_TAB), LCTL(KC_F11), LCTL(KC_F12), LCTL(KC_TILDE),  S(LALT(LCMD(KC_F11))) , S(LALT(LCMD(KC_F12))), S(LALT(LCMD(KC_TILDE))), S(LALT(LCMD(KC_LT))), S(LALT(LCMD(KC_CIRC))), _______, 
   _______    , _______    ,  _______    , _______     , _______     , _______       ,  S(LALT(LCMD(KC_UNDS))), S(LALT(LCMD(KC_DLR))), S(LALT(LCMD(KC_AMPR))) , xxxxx               , xxxxx                 , S(LALT(LCMD(KC_PIPE)))
 ),
 
-[_NUM] = KEYMAP(
-  _______,     KC_F1  ,     KC_F2  ,     KC_F3  ,      KC_F4  ,      KC_F5  ,                KC_F6   ,  KC_F7  ,     KC_F8  ,    KC_F9  ,      KC_F10 ,     KC_F12 ,
-  _______,     KC_1   ,     KC_2   ,     KC_3   ,      KC_4   ,      KC_5   ,                KC_6    ,  KC_7   ,     KC_8   ,    KC_9   ,      KC_0   ,      _______,
-  _______,     KC_PPLS,     KC_PMNS,     KC_PAST,      KC_PSLS,      KC_COLN,                KC_PERC ,  KC_EQL ,     KC_COMM,    KC_DOT ,      em     ,      _______,
-  _______,     _______,     _______,     KC_BSPC,      KC_SPC ,      MO(_FL1_clone),         _______ ,  _______,     _______,    _______,      _______,      _______
+[_NUM] = LAYOUT(
+  _______,     KC_F1  ,     KC_F2  ,     KC_F3  ,      KC_F4  ,      KC_F5  ,                KC_F6   ,  KC_F7  ,     KC_F8  ,    KC_F9  , KC_F10                ,     KC_F12 ,
+  _______,     KC_1   ,     KC_2   ,     KC_3   ,      KC_4   ,      KC_5   ,                KC_6    ,  KC_7   ,     KC_8   ,    KC_9   , KC_0                  ,      _______,
+  _______,     KC_PPLS,     KC_PMNS,     KC_PAST,      KC_PSLS,      KC_DOT ,                KC_PERC ,  KC_EQL ,     KC_COLN,    px     , S(LALT(LCMD(KC_PAST))),      _______,
+  _______,     _______,     _______,     KC_BSPC,      KC_SPC ,      MO(_FL1_clone),         _______ ,  _______,     _______,    _______, _______               ,      _______
 ),
 
-[_LEFT_NUM] = KEYMAP(
+[_LEFT_NUM] = LAYOUT(
   xxxxx,     xxxxx  ,     KC_7   , KC_8   , KC_9, xxxxx  ,                xxxxx,     xxxxx,     xxxxx,    xxxxx,      xxxxx,      xxxxx,
   xxxxx,     xxxxx  ,     KC_4   , KC_5   , KC_6, KC_PAST,                KC_PSLS,     xxxxx,     xxxxx,    xxxxx,      xxxxx,      xxxxx,
   xxxxx,     xxxxx  ,     KC_1   , KC_2   , KC_3, KC_PPLS,                KC_PMNS,     xxxxx,     xxxxx,    xxxxx,      xxxxx,      xxxxx,
   xxxxx,     xxxxx  ,     KC_COLN, xxxxx  , KC_0, KC_DOT ,                xxxxx,     xxxxx,     xxxxx,    xxxxx,      xxxxx,      xxxxx
 ),
 
-[_FL1_clone] = KEYMAP(
+[_FL1_clone] = LAYOUT(
   KC_AMPR, KC_UNDS    , KC_LCBR, KC_RCBR     , TD(COPY_CUT)   , _PASTE ,        S(LCMD(KC_D)), S(LCMD(KC_LEFT)) , KC_UP      , S(LCMD(KC_RGHT)), _slctWord    , LCMD(KC_SLSH),
   KC_PIPE, KC_DLR     , KC_LPRN, KC_RPRN     , TD(TD_COL_SEMC), KC_EXLM,        KC_HOME      , KC_LEFT          , KC_DOWN    , KC_RGHT         , KC_END       , xxxxx,
   KC_BSLS, TD(GT_RBRC), KC_LBRC, KC_EQL      , TD(QUO_DQUO)   , KC_QUES,        KC_COMM      , LCMD(KC_LEFT)    , LCMD(KC_UP), LCMD(KC_RGHT)   , LCMD(KC_DOWN), KC_LSFT,
@@ -215,39 +213,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 
-[_PROGRAMMING] = KEYMAP(
-  S(LCTL(KC_F1))   ,S(LCTL(KC_F2))   , S(LCTL(KC_F3)) , S(LCTL(KC_F4)) , S(LCTL(KC_F5)) , S(LCTL(KC_F6))  ,  _______,     _______,     _______,    _______,      _______,      _______,
-  S(LCTL(KC_F7))   ,S(LCTL(KC_F8))   , S(LCTL(KC_F9)) , S(LCTL(KC_TAB)), S(LCTL(KC_F11)), S(LCTL(KC_F12)) ,  _______,     _______,     _______,    _______,      _______,      _______,
-  S(LCTL(KC_TILDE)),S(LCTL(KC_LT))   , LCMD(KC_L)     , _DupLine       , LCMD(KC_SLASH) , S(LCTL(KC_CIRC)),  _______,     _______,     _______,    _______,      _______,      _______,
-  _______           , _______        , _______        , _______        , _______        , _______         ,  _______,     _______,     _______,    _______,      _______,      _______
+[_PROGRAMMING] = LAYOUT(
+  S(LCTL(KC_F1))   ,S(LCTL(KC_F2))   , S(LCTL(KC_F3)) , S(LCTL(KC_F4)) , S(LCTL(KC_F5)) , S(LCTL(KC_F6))  ,   S(LALT(KC_F1))  , S(LALT(KC_F2))  , S(LALT(KC_F3))   ,S(LALT(KC_F4)), S(LALT(KC_F5))  , _______,
+  S(LCTL(KC_F7))   ,S(LCTL(KC_F8))   , S(LCTL(KC_F9)) , S(LCTL(KC_TAB)), S(LCTL(KC_F11)), S(LCTL(KC_F12)) ,   S(LALT(KC_F6))  , S(LALT(KC_F7))  , S(LALT(KC_F8))   ,S(LALT(KC_F9)), S(LALT(KC_TAB)) , _______,
+  S(LCTL(KC_TILDE)),S(LCTL(KC_LT))   , LCMD(KC_L)     , _DupLine       , LCMD(KC_SLASH) , S(LCTL(KC_CIRC)),   S(LALT(KC_F11)) , S(LALT(KC_F12)) , S(LALT(KC_TILDE)),S(LALT(KC_LT)), S(LALT(KC_CIRC)), _______,
+  _______           , _______        , _______        , _______        , _______        , _______         ,   S(LALT(KC_UNDS)), S(LALT(KC_DLR)) , S(LALT(KC_AMPR)) , _______      , _______         , S(LALT(KC_PIPE))
 ),
 
 
-[_LEFT] = KEYMAP(
+
+[_LEFT] = LAYOUT(
   xxxxx  , S(LALT(LCTL(KC_F1))) , S(LALT(LCTL(KC_F2))) , S(LALT(LCTL(KC_F3))) , xxxxx             , xxxxx  ,          _______,     _______      , LCTL(KC_UP)  , _______      , _______, _______,
   xxxxx  , S(LALT(LCTL(KC_F4))) , S(LALT(LCTL(KC_F5))), S(LALT(LCTL(KC_F6))), xxxxx             , xxxxx  ,          _______,     LCTL(KC_LEFT), LCTL(KC_DOWN), LCTL(KC_RGHT), _______, _______,
   xxxxx  , S(LALT(LCTL(KC_F7))), S(LALT(LCTL(KC_F8)))  , S(LALT(LCTL(KC_F9)))  , xxxxx             , xxxxx  ,          _______,     _______      , _______      , _______      , _______, _______,
   _______, _______             , _______               , S(LALT(LCTL(KC_TAB)))  ,S(LALT(LCTL(KC_F11))), _______,          _______,     _______      , _______      , _______      , _______, _______
 ),
 
-[_LEFT2] = KEYMAP(
+[_LEFT2] = LAYOUT(
   _______,     _______,     _______,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______,
   _______,     _______,     KC_UP  ,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______,
   _______,     KC_LEFT,     KC_DOWN,     KC_RGHT,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______,
   _______,     _______,     _______,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______
 ),
 
-[_MOUSE] = KEYMAP(
+[_MOUSE] = LAYOUT(
   xxxxx  ,     xxxxx     , xxxxx     , KC_MS_U        , xxxxx       , xxxxx  ,                xxxxx  ,     KC_BTN4,     KC_BTN3,    KC_BTN5,      xxxxx  ,      xxxxx  ,
   xxxxx  ,     xxxxx     , KC_MS_L   , KC_MS_D        , KC_MS_R     , xxxxx  ,                xxxxx  ,     KC_BTN1,     KC_BTN2,    KC_ACL0,      KC_ACL1,      KC_ACL2,
   xxxxx  ,     LCMD(KC_W), LCMD(KC_R), S(LCTL(KC_TAB)), LCTL(KC_TAB), xxxxx  ,                xxxxx  ,     KC_WH_U,     KC_WH_D,    KC_WH_L,      KC_WH_R,      xxxxx  ,
   _______,     _______   , _______   , KC_ACL2        , KC_ACL0     , KC_ACL1,                _______,     _______,     _______,    _______,      _______,      _______
 ),
 
-[_LED_SOUND] = KEYMAP(
+[_LED_SOUND] = LAYOUT(
   RESET  ,     xxxxx  ,     xxxxx   ,    xxxxx   ,      xxxxx   ,      xxxxx   ,                xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx  ,      KC_PWR  ,      KC_SLEP,
-  RGB_TOG,     RGB_VAI,     RGB_VAD ,    RGB_SAI ,      RGB_SAD ,      RGB_HUI ,                RGB_HUD,     xxxxx  ,     xxxxx   ,    xxxxx  ,      xxxxx   ,      KC_WAKE,
-  xxxxx  ,     RGB_M_P,     RGB_M_B ,    RGB_M_SW,      RGB_M_SN,      RGB_M_R ,                RGB_M_K,     RGB_M_X,     RGB_M_G ,    xxxxx  ,      xxxxx   ,      xxxxx  ,
+  xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx   ,      xxxxx   ,      xxxxx   ,                xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx  ,      xxxxx   ,      KC_WAKE,
+  xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx   ,      xxxxx   ,      xxxxx   ,                xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx  ,      xxxxx   ,      xxxxx  ,
   xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx   ,      xxxxx   ,      xxxxx   ,                xxxxx  ,     KC_MUTE,     KC_VOLU ,    KC_VOLD,      xxxxx   ,      xxxxx
 ),
 
@@ -261,20 +260,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //   _______,     _______,     _______,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______
 // ),
 };
-
-// Loop
-void matrix_scan_user(void) {
-  // Empty
-};
-
-
-void matrix_init_user(void) { // Runs boot tasks for keyboard
-    rgblight_enable();
-    rgblight_sethsv(166,100,100);
-    // rgblight_mode(3);
-};
-
-
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {

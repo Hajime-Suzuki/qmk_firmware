@@ -1,4 +1,4 @@
-#include "niu_mini.h"
+#include "jj40.h"
 #include "action_layer.h"
 
 
@@ -12,12 +12,11 @@
 #define _NUM 4
 #define _LEFT 5
 #define _LEFT_NUM 6
-#define _LEFT2 7
 #define _PROGRAMMING 8
 #define _SHORTCUTS 9
-#define _MOUSE 10
 #define _FL1_clone 11
 #define _LED_SOUND 12
+#define _BRAWLHALLA 14
 
 
 #define _COPY LCMD(KC_C)
@@ -162,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   OSM(MOD_LGUI)     , KC_A, KC_S, KC_H, KC_T, KC_G,       KC_Y, KC_N, KC_E   , KC_O  , KC_I       , KC_MINS,
   LT(_LEFT, KC_ESC) , KC_Z, KC_V, KC_M, KC_C, KC_X,       KC_K, KC_L, KC_COMM, KC_DOT, KC_SLSH    , KC_LCTL,
 
-  KC_ENT,  MO(_LEFT_NUM), LT(_LEFT2, KC_ESC),   LT(_PROGRAMMING, KC_TAB), LT(_SHORTCUTS, KC_SPC), MO(_FL1),   OSM(MOD_LSFT), LT(_NUM, KC_BSPC), LT(_MOUSE, KC_DEL), KC_APP, MO(_LED_SOUND), S(LCMD(KC_F9))
+  KC_ENT,  MO(_LEFT_NUM), KC_ESC,   LT(_PROGRAMMING, KC_TAB), LT(_SHORTCUTS, KC_SPC), MO(_FL1),   OSM(MOD_LSFT), LT(_NUM, KC_BSPC), KC_DEL, KC_APP, MO(_LED_SOUND), S(LCMD(KC_F9))
 ),
 
 [_FL1] = KEYMAP(
@@ -196,7 +195,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_NUM] = KEYMAP(
   _______,     KC_F1  ,     KC_F2  ,     KC_F3  ,      KC_F4  ,      KC_F5  ,                KC_F6   ,  KC_F7  ,     KC_F8  ,    KC_F9  ,      KC_F10 ,     KC_F12 ,
   _______,     KC_1   ,     KC_2   ,     KC_3   ,      KC_4   ,      KC_5   ,                KC_6    ,  KC_7   ,     KC_8   ,    KC_9   ,      KC_0   ,      _______,
-  _______,     KC_PPLS,     KC_PMNS,     KC_PAST,      KC_PSLS,      KC_COLN,                KC_PERC ,  KC_EQL ,     KC_COMM,    KC_DOT ,      em     ,      _______,
+  _______,     KC_PPLS,     KC_PMNS,     KC_PAST,      KC_PSLS,      KC_DOT ,                KC_PERC ,  KC_EQL ,     KC_COLN,    px     ,      em     ,      _______,
   _______,     _______,     _______,     KC_BSPC,      KC_SPC ,      MO(_FL1_clone),         _______ ,  _______,     _______,    _______,      _______,      _______
 ),
 
@@ -230,25 +229,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______             , _______               , S(LALT(LCTL(KC_TAB)))  ,S(LALT(LCTL(KC_F11))), _______,          _______,     _______      , _______      , _______      , _______, _______
 ),
 
-[_LEFT2] = KEYMAP(
-  _______,     _______,     _______,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______,
-  _______,     _______,     KC_UP  ,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______,
-  _______,     KC_LEFT,     KC_DOWN,     KC_RGHT,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______,
-  _______,     _______,     _______,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______
+[_BRAWLHALLA] = KEYMAP(
+  KC_ESC   , KC_Q, KC_D, KC_R, KC_W, KC_B,       KC_J, KC_F, KC_U   , KC_P  , KC_LBRC, KC_RBRC,
+  KC_TAB   , KC_A, KC_S, KC_H, KC_T, KC_G,       KC_Y, KC_N, KC_E   , KC_O  , KC_I       , KC_MINS,
+  KC_ESC   , KC_Z, KC_V, KC_M, KC_C, KC_X,       KC_K, KC_L, KC_COMM, KC_DOT, KC_SLSH    , KC_LCTL,
+  _______, _______    , _______, KC_TAB      , KC_SPC         , KC_SPC,        MO(_FL2)     , LT(_NUM, KC_BSPC), KC_SPC     , _______         ,  MO(_LED_SOUND), _______
 ),
 
-[_MOUSE] = KEYMAP(
-  xxxxx  ,     xxxxx     , xxxxx     , KC_MS_U        , xxxxx       , xxxxx  ,                xxxxx  ,     KC_BTN4,     KC_BTN3,    KC_BTN5,      xxxxx  ,      xxxxx  ,
-  xxxxx  ,     xxxxx     , KC_MS_L   , KC_MS_D        , KC_MS_R     , xxxxx  ,                xxxxx  ,     KC_BTN1,     KC_BTN2,    KC_ACL0,      KC_ACL1,      KC_ACL2,
-  xxxxx  ,     LCMD(KC_W), LCMD(KC_R), S(LCTL(KC_TAB)), LCTL(KC_TAB), xxxxx  ,                xxxxx  ,     KC_WH_U,     KC_WH_D,    KC_WH_L,      KC_WH_R,      xxxxx  ,
-  _______,     _______   , _______   , KC_ACL2        , KC_ACL0     , KC_ACL1,                _______,     _______,     _______,    _______,      _______,      _______
-),
 
 [_LED_SOUND] = KEYMAP(
   RESET  ,     xxxxx  ,     xxxxx   ,    xxxxx   ,      xxxxx   ,      xxxxx   ,                xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx  ,      KC_PWR  ,      KC_SLEP,
   RGB_TOG,     RGB_VAI,     RGB_VAD ,    RGB_SAI ,      RGB_SAD ,      RGB_HUI ,                RGB_HUD,     xxxxx  ,     xxxxx   ,    xxxxx  ,      xxxxx   ,      KC_WAKE,
   xxxxx  ,     RGB_M_P,     RGB_M_B ,    RGB_M_SW,      RGB_M_SN,      RGB_M_R ,                RGB_M_K,     RGB_M_X,     RGB_M_G ,    xxxxx  ,      xxxxx   ,      xxxxx  ,
-  xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx   ,      xxxxx   ,      xxxxx   ,                xxxxx  ,     KC_MUTE,     KC_VOLU ,    KC_VOLD,      xxxxx   ,      xxxxx
+  xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx   ,      xxxxx   ,      xxxxx   ,                xxxxx  ,     KC_MUTE,     KC_VOLU ,    KC_VOLD,      xxxxx   ,      TG(_BRAWLHALLA)
 ),
 
 
