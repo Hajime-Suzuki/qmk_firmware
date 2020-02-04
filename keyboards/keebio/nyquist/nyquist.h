@@ -1,17 +1,10 @@
 #pragma once
 
-#ifdef KEYBOARD_keebio_nyquist_rev1
-    #include "rev1.h"
-#endif
-#ifdef KEYBOARD_keebio_nyquist_rev2
-    #include "rev2.h"
-#endif
 #ifdef KEYBOARD_keebio_nyquist_rev3
     #include "rev3.h"
 #endif
 
 #include "quantum.h"
-
 // Used to create a keymap using only KC_ prefixed keys
 #define LAYOUT_kc( \
     L00, L01, L02, L03, L04, L05, R00, R01, R02, R03, R04, R05, \
@@ -43,3 +36,5 @@
         L30, L31, L32, L33, L34, L35, R30, R31, R32, R33, R34, R35, \
         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO \
     )
+
+#define KEYMAP LAYOUT_ortho_4x12
