@@ -18,7 +18,8 @@
 #define _MOUSE 10
 #define _FL1_clone 11
 #define _LED_SOUND 12
-
+#define _EnterShortCut 13
+#define _BRAWLHALLA 14
 
 #define _COPY LCMD(KC_C)
 #define _PASTE LCMD(KC_V)
@@ -156,13 +157,12 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-
 [_BL] = KEYMAP(
   OSM(MOD_LALT)     , KC_Q, KC_D, KC_R, KC_W, KC_B,       KC_J, KC_F, KC_U   , KC_P  , S(LCMD(KC_F8)) , OSM(MOD_LGUI | MOD_LSFT),
   OSM(MOD_LGUI)     , KC_A, KC_S, KC_H, KC_T, KC_G,       KC_Y, KC_N, KC_E   , KC_O  , KC_I       , KC_MINS,
   LT(_LEFT, KC_ESC) , KC_Z, KC_V, KC_M, KC_C, KC_X,       KC_K, KC_L, KC_COMM, KC_DOT, KC_SLSH    , KC_LCTL,
 
-  KC_ENT,  MO(_LEFT_NUM), LT(_LEFT2, KC_ESC),   LT(_PROGRAMMING, KC_TAB), LT(_SHORTCUTS, KC_SPC), MO(_FL1),   OSM(MOD_LSFT), LT(_NUM, KC_BSPC), LT(_MOUSE, KC_DEL), KC_APP, MO(_LED_SOUND), S(LCMD(KC_F9))
+  LT(_EnterShortCut ,KC_ENT),  MO(_LEFT_NUM), KC_ESC,   LT(_PROGRAMMING, KC_TAB), LT(_SHORTCUTS, KC_SPC), MO(_FL1),   OSM(MOD_LSFT), LT(_NUM, KC_BSPC), LT(_MOUSE, KC_DEL), KC_APP, MO(_LED_SOUND), S(LCMD(KC_F9))
 ),
 
 [_FL1] = KEYMAP(
@@ -230,10 +230,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______             , _______               , S(LALT(LCTL(KC_TAB)))  ,S(LALT(LCTL(KC_F11))), _______,          _______,     _______      , _______      , _______      , _______, _______
 ),
 
-[_LEFT2] = KEYMAP(
-  _______,     _______,     _______,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______,
-  _______,     _______,     KC_UP  ,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______,
-  _______,     KC_LEFT,     KC_DOWN,     KC_RGHT,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______,
+[_EnterShortCut] = KEYMAP(
+  xxxxx,     xxxxx,     xxxxx,     S(LCTL(KC_TAB)),   LCTL(KC_TAB) ,   xxxxx,              xxxxx,     KC_BTN1,     KC_WH_D,    KC_BTN2,      xxxxx  ,      xxxxx,
+  xxxxx,     xxxxx,     xxxxx,     xxxxx          ,   xxxxx        ,   xxxxx,              xxxxx,     xxxxx  ,     KC_WH_U,    xxxxx  ,      xxxxx  ,      xxxxx,
+  xxxxx,     xxxxx,     xxxxx,     xxxxx          ,   xxxxx        ,   xxxxx,              xxxxx,     xxxxx  ,     xxxxx  ,    xxxxx  ,      xxxxx  ,      xxxxx,
   _______,     _______,     _______,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______
 ),
 
@@ -244,15 +244,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______,     _______   , _______   , KC_ACL2        , KC_ACL0     , KC_ACL1,                _______,     _______,     _______,    _______,      _______,      _______
 ),
 
+[_BRAWLHALLA] = KEYMAP(
+  KC_ESC   , KC_Q, KC_D, KC_R, KC_W, KC_B,       KC_J, KC_F, KC_U   , KC_P  , KC_LBRC, KC_RBRC,
+  KC_TAB   , KC_A, KC_S, KC_H, KC_T, KC_G,       KC_Y, KC_N, KC_E   , KC_O  , KC_I       , KC_MINS,
+  KC_ESC   , KC_Z, KC_V, KC_M, KC_C, KC_X,       KC_K, KC_L, KC_COMM, KC_DOT, KC_SLSH    , KC_LCTL,
+  _______, _______    , _______, KC_TAB      , KC_SPC         , KC_SPC,        MO(_FL2)     , LT(_NUM, KC_BSPC), KC_SPC     , _______         ,  MO(_LED_SOUND), _______
+),
+
 [_LED_SOUND] = KEYMAP(
   RESET  ,     xxxxx  ,     xxxxx   ,    xxxxx   ,      xxxxx   ,      xxxxx   ,                xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx  ,      KC_PWR  ,      KC_SLEP,
   RGB_TOG,     RGB_VAI,     RGB_VAD ,    RGB_SAI ,      RGB_SAD ,      RGB_HUI ,                RGB_HUD,     xxxxx  ,     xxxxx   ,    xxxxx  ,      xxxxx   ,      KC_WAKE,
   xxxxx  ,     RGB_M_P,     RGB_M_B ,    RGB_M_SW,      RGB_M_SN,      RGB_M_R ,                RGB_M_K,     RGB_M_X,     RGB_M_G ,    xxxxx  ,      xxxxx   ,      xxxxx  ,
-  xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx   ,      xxxxx   ,      xxxxx   ,                xxxxx  ,     KC_MUTE,     KC_VOLU ,    KC_VOLD,      xxxxx   ,      xxxxx
+  xxxxx  ,     xxxxx  ,     xxxxx   ,    xxxxx   ,      xxxxx   ,      xxxxx   ,                xxxxx  ,     KC_MUTE,     KC_VOLU ,    KC_VOLD,      xxxxx   ,      TG(_BRAWLHALLA)
 ),
-
-
-
 
 // [_BLANK] = KEYMAP(
 //   _______,     _______,     _______,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______,

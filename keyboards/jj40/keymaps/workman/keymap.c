@@ -16,6 +16,7 @@
 #define _SHORTCUTS 9
 #define _FL1_clone 11
 #define _LED_SOUND 12
+#define _EnterShortCut 13
 #define _BRAWLHALLA 14
 
 
@@ -161,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   OSM(MOD_LGUI)     , KC_A, KC_S, KC_H, KC_T, KC_G,       KC_Y, KC_N, KC_E   , KC_O  , KC_I       , KC_MINS,
   LT(_LEFT, KC_ESC) , KC_Z, KC_V, KC_M, KC_C, KC_X,       KC_K, KC_L, KC_COMM, KC_DOT, KC_SLSH    , KC_LCTL,
 
-  KC_ENT,  MO(_LEFT_NUM), KC_ESC,   LT(_PROGRAMMING, KC_TAB), LT(_SHORTCUTS, KC_SPC), MO(_FL1),   OSM(MOD_LSFT), LT(_NUM, KC_BSPC), KC_DEL, KC_APP, MO(_LED_SOUND), S(LCMD(KC_F9))
+  LT(_EnterShortCut ,KC_ENT),  MO(_LEFT_NUM), KC_ESC,   LT(_PROGRAMMING, KC_TAB), LT(_SHORTCUTS, KC_SPC), MO(_FL1),   OSM(MOD_LSFT), LT(_NUM, KC_BSPC), LT(_MOUSE, KC_DEL), KC_APP, MO(_LED_SOUND), S(LCMD(KC_F9))
 ),
 
 [_FL1] = KEYMAP(
@@ -227,6 +228,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   xxxxx  , S(LALT(LCTL(KC_F4))) , S(LALT(LCTL(KC_F5))), S(LALT(LCTL(KC_F6))), xxxxx             , xxxxx  ,          _______,     LCTL(KC_LEFT), LCTL(KC_DOWN), LCTL(KC_RGHT), _______, _______,
   xxxxx  , S(LALT(LCTL(KC_F7))), S(LALT(LCTL(KC_F8)))  , S(LALT(LCTL(KC_F9)))  , xxxxx             , xxxxx  ,          _______,     _______      , _______      , _______      , _______, _______,
   _______, _______             , _______               , S(LALT(LCTL(KC_TAB)))  ,S(LALT(LCTL(KC_F11))), _______,          _______,     _______      , _______      , _______      , _______, _______
+),
+
+[_EnterShortCut] = KEYMAP(
+  xxxxx,     xxxxx,     xxxxx,     S(LCTL(KC_TAB)),   LCTL(KC_TAB) ,   xxxxx,              xxxxx,     KC_BTN1,     KC_WH_D,    KC_BTN2,      xxxxx  ,      xxxxx,
+  xxxxx,     xxxxx,     xxxxx,     xxxxx          ,   xxxxx        ,   xxxxx,              xxxxx,     xxxxx  ,     KC_WH_U,    xxxxx  ,      xxxxx  ,      xxxxx,
+  xxxxx,     xxxxx,     xxxxx,     xxxxx          ,   xxxxx        ,   xxxxx,              xxxxx,     xxxxx  ,     xxxxx  ,    xxxxx  ,      xxxxx  ,      xxxxx,
+  _______,     _______,     _______,     _______,      _______,      _______,                _______,     _______,     _______,    _______,      _______,      _______
 ),
 
 [_BRAWLHALLA] = KEYMAP(
