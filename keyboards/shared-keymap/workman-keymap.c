@@ -217,7 +217,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_PROGRAMMING] = KEYMAP(
   S(LCTL(KC_F1))   ,S(LCTL(KC_F2))   , S(LCTL(KC_F3)) , S(LCTL(KC_F4)) , S(LCTL(KC_F5)) , S(LCTL(KC_F6))  ,  _______,     _______,     _______,    _______,      _______,      _______,
-  S(LCTL(KC_F7))   ,S(LCTL(KC_F8))   , S(LCTL(KC_F9)) , S(LCTL(KC_TAB)), S(LCTL(KC_F11)), S(LCTL(KC_F12)) ,  _______,     _______,     _______,    _______,      _______,      _______,
+  S(LCTL(KC_F7))   ,S(LCTL(KC_F8))   , S(LCTL(KC_F9)) , S(LCTL(KC_F10)), S(LCTL(KC_F11)), S(LCTL(KC_F12)) ,  _______,     _______,     _______,    _______,      _______,      _______,
   S(LCTL(KC_TILDE)),S(LCTL(KC_LT))   , LCMD(KC_L)     , _DupLine       , LCMD(KC_SLASH) , S(LCTL(KC_CIRC)),  _______,     _______,     _______,    _______,      _______,      _______,
   _______           , _______        , _______        , _______        , _______        , _______         ,  _______,     _______,     _______,    _______,      _______,      _______
 ),
