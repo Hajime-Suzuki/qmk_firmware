@@ -22,10 +22,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case px:
                 SEND_STRING("px"); // this is our macro!
                 return false;
-            case em:
-                SEND_STRING("em"); // this is our macro!
+            case cl_log:
+                SEND_STRING("console.log()"); // this is our macro!
                 return false;
         }
     }
     return true;
 };
+
