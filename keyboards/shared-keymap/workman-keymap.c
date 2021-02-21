@@ -189,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_SHORTCUTS] = KEYMAP(
   LCTL(KC_F1), LCTL(KC_F2), LCMD(KC_F)            , LCTL(KC_F4) , LCTL(KC_F5) , LCTL(KC_F6)   ,  S(LALT(LCMD(KC_F1)))  , S(LALT(LCMD(KC_F2))) , S(LALT(LCMD(KC_F3)))   , S(LALT(LCMD(KC_F4))), S(LALT(LCMD(KC_F5)))  , _______, 
   LCTL(KC_F7), _SAVE      , _S_NO_FRMT            , _UNDO       , _REDO       , LCTL(KC_F8)   ,  S(LALT(LCMD(KC_F6)))  , S(LALT(LCMD(KC_F7))) , S(LALT(LCMD(KC_F8)))   , S(LALT(LCMD(KC_F9))), S(LALT(LCMD(KC_TAB))) , _______, 
-  LCTL(KC_F9), LCMD(KC_W) , S(LALT(LCMD(KC_AMPR))), LCTL(KC_F11), LCTL(KC_F12), LCTL(KC_TILDE),  S(LALT(LCMD(KC_F11))) , S(LALT(LCMD(KC_F12))), S(LALT(LCMD(KC_TILDE))), S(LALT(LCMD(KC_LT))), S(LALT(LCMD(KC_CIRC))), _______, 
+  LCTL(KC_F9), LCMD(KC_W) , S(LALT(LCMD(KC_AMPR))), LCTL(KC_F11), LCTL(KC_F12), LCTL(KC_GRAVE),  S(LALT(LCMD(KC_F11))) , S(LALT(LCMD(KC_F12))), S(LALT(LCMD(KC_TILDE))), S(LALT(LCMD(KC_LT))), S(LALT(LCMD(KC_CIRC))), _______, 
   _______    , _______    ,  _______              , _______     , _______     , _______       ,  S(LALT(LCMD(KC_UNDS))), S(LALT(LCMD(KC_DLR))), S(LALT(LCMD(KC_AMPR))) , xxxxx               , xxxxx                 , S(LALT(LCMD(KC_PIPE)))
 ),
 
@@ -218,7 +218,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_PROGRAMMING] = KEYMAP(
   S(LCTL(KC_F1))   ,S(LCTL(KC_F2))   , S(LCTL(KC_F3)) , S(LCTL(KC_F4)) , S(LCTL(KC_F5)) , S(LCTL(KC_F6))  ,  _______,     _______,     _______,    _______,      _______,      _______,
   S(LCTL(KC_F7))   ,S(LCTL(KC_F8))   , S(LCTL(KC_F9)) , S(LCTL(KC_F10)), S(LCTL(KC_F11)), S(LCTL(KC_F12)) ,  _______,     _______,     _______,    _______,      _______,      _______,
-  S(LCTL(KC_TILDE)),S(LCTL(KC_LT))   , LCMD(KC_L)     , _DupLine       , LCMD(KC_SLASH) , S(LCTL(KC_CIRC)),  _______,     _______,     _______,    _______,      _______,      _______,
+  S(LCTL(KC_GRAVE)),S(LCTL(KC_LT))   , LCMD(KC_L)     , _DupLine       , LCMD(KC_SLASH) , S(LCTL(KC_CIRC)),  _______,     _______,     _______,    _______,      _______,      _______,
   _______           , _______        , _______        , _______        , _______        , _______         ,  _______,     _______,     _______,    _______,      _______,      _______
 ),
 
