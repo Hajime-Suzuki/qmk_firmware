@@ -18,7 +18,11 @@ BOOTMAGIC_ENABLE = no       # Virtual DIP switch configuration
 MOUSEKEY_ENABLE = yes       # Mouse keys
 EXTRAKEY_ENABLE = yes       # Audio control and System control
 CONSOLE_ENABLE = no         # Console for debug
+<<<<<<< HEAD
 COMMAND_ENABLE = no        # Commands for debug and configuration
+=======
+COMMAND_ENABLE = no         # Commands for debug and configuration
+>>>>>>> c59fb1b477c4877fc29aeec8fe5f98dbf8788369
 NKRO_ENABLE = no            # Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
 BACKLIGHT_ENABLE = yes      # Enable keyboard backlight functionality
 MIDI_ENABLE = no            # MIDI controls
