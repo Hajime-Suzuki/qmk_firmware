@@ -15,13 +15,14 @@
  * GPL v2 or later.
  */
 
-#pragma once
+#ifndef _USB_MAIN_H_
+#define _USB_MAIN_H_
 
 // TESTING
 // extern uint8_t blinkLed;
 
-#include <ch.h>
-#include <hal.h>
+#include "ch.h"
+#include "hal.h"
 
 /* -------------------------
  * General USB driver header
@@ -33,20 +34,6 @@
 
 /* Initialize the USB driver and bus */
 void init_usb_driver(USBDriver *usbp);
-
-/* Restart the USB driver and bus */
-void restart_usb_driver(USBDriver *usbp);
-
-/* ---------------
- * USB Event queue
- * ---------------
- */
-
-/* Initialisation of the FIFO */
-void usb_event_queue_init(void);
-
-/* Task to dequeue and execute any handlers for the USB events on the main thread */
-void usb_event_queue_task(void);
 
 /* ---------------
  * Keyboard header
@@ -99,3 +86,7 @@ int8_t sendchar(uint8_t c);
 void console_flush_output(void);
 
 #endif /* CONSOLE_ENABLE */
+
+void sendchar_pf(void *p, char c);
+
+#endif /* _USB_MAIN_H_ */

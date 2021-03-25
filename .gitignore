@@ -16,7 +16,6 @@
 *.swp
 tags
 *~
-api_data/v1
 build/
 .build/
 *.bak
@@ -74,11 +73,3 @@ __pycache__
 
 # prerequisites for updating ChibiOS
 /util/fmpp*
-
-# Allow to exist but don't include it in the repo
-user_song_list.h
-
-
-# !keyboards/niu_mini
-# !keyboards/jj_40
-# !keyboards/shared_keymap

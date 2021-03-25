@@ -1,4 +1,3 @@
-#include "quantum.h"
 #include "matrix.h"
 #include "debounce.h"
 #include "wait.h"
@@ -69,7 +68,7 @@ void matrix_print(void) {
     print_matrix_header();
 
     for (uint8_t row = 0; row < MATRIX_ROWS; row++) {
-        print_hex8(row);
+        phex(row);
         print(": ");
         print_matrix_row(row);
         print("\n");
@@ -84,11 +83,7 @@ uint8_t matrix_key_count(void) {
     return count;
 }
 
-/*　`matrix_io_delay ()` exists for backwards compatibility. From now on, use matrix_output_unselect_delay().　*/
 __attribute__((weak)) void matrix_io_delay(void) { wait_us(MATRIX_IO_DELAY); }
-
-__attribute__((weak)) void matrix_output_select_delay(void) { waitInputPinDelay(); }
-__attribute__((weak)) void matrix_output_unselect_delay(void) { matrix_io_delay(); }
 
 // CUSTOM MATRIX 'LITE'
 __attribute__((weak)) void matrix_init_custom(void) {}
@@ -117,5 +112,3 @@ __attribute__((weak)) uint8_t matrix_scan(void) {
     matrix_scan_quantum();
     return changed;
 }
-
-__attribute__((weak)) bool peek_matrix(uint8_t row_index, uint8_t col_index, bool raw) { return 0 != ((raw ? raw_matrix[row_index] : matrix[row_index]) & (MATRIX_ROW_SHIFTER << col_index)); }

@@ -5,7 +5,6 @@
 #endif
 #include "quantum.h"
 
-#undef TAPPING_TERM
 #define TAPPING_TERM 150
 
 // Keys 

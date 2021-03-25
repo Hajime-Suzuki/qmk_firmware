@@ -15,13 +15,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "printf.h"
-#include "sendchar.h"
-
 #ifdef CONSOLE_ENABLE
 
 #    include "samd51j18a.h"
 #    include "arm_atsam_protocol.h"
+#    include "printf.h"
 #    include <string.h>
 #    include <stdarg.h>
 
@@ -68,5 +66,3 @@ void console_printf(char *fmt, ...) {
 }
 
 #endif  // CONSOLE_ENABLE
-
-void print_set_sendchar(sendchar_func_t send) {}

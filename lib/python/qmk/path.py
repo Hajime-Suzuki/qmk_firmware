@@ -2,21 +2,28 @@
 """
 import logging
 import os
-import argparse
 from pathlib import Path
 
-from qmk.constants import MAX_KEYBOARD_SUBFOLDERS, QMK_FIRMWARE
+from qmk.constants import QMK_FIRMWARE, MAX_KEYBOARD_SUBFOLDERS
 from qmk.errors import NoSuchKeyboardError
+
+
+def is_keymap_dir(keymap_path):
+    """Returns True if `keymap_path` is a valid keymap directory.
+    """
+    keymap_path = Path(keymap_path)
+    keymap_c = keymap_path / 'keymap.c'
+    keymap_json = keymap_path / 'keymap.json'
+
+    return any((keymap_c.exists(), keymap_json.exists()))
 
 
 def is_keyboard(keyboard_name):
     """Returns True if `keyboard_name` is a keyboard we can compile.
     """
-    if keyboard_name:
-        keyboard_path = QMK_FIRMWARE / 'keyboards' / keyboard_name
-        rules_mk = keyboard_path / 'rules.mk'
-
-        return rules_mk.exists()
+    keyboard_path = QMK_FIRMWARE / 'keyboards' / keyboard_name
+    rules_mk = keyboard_path / 'rules.mk'
+    return rules_mk.exists()
 
 
 def under_qmk_firmware():
@@ -30,21 +37,15 @@ def under_qmk_firmware():
         return None
 
 
-def keyboard(keyboard_name):
-    """Returns the path to a keyboard's directory relative to the qmk root.
-    """
-    return Path('keyboards') / keyboard_name
-
-
-def keymap(keyboard_name):
+def keymap(keyboard):
     """Locate the correct directory for storing a keymap.
 
     Args:
 
-        keyboard_name
+        keyboard
             The name of the keyboard. Example: clueboard/66/rev3
     """
-    keyboard_folder = keyboard(keyboard_name)
+    keyboard_folder = Path('keyboards') / keyboard
 
     for i in range(MAX_KEYBOARD_SUBFOLDERS):
         if (keyboard_folder / 'keymaps').exists():
@@ -53,7 +54,7 @@ def keymap(keyboard_name):
         keyboard_folder = keyboard_folder.parent
 
     logging.error('Could not find the keymaps directory!')
-    raise NoSuchKeyboardError('Could not find keymaps directory for: %s' % keyboard_name)
+    raise NoSuchKeyboardError('Could not find keymaps directory for: %s' % keyboard)
 
 
 def normpath(path):
@@ -69,10 +70,15 @@ def normpath(path):
     return Path(os.environ['ORIG_CWD']) / path
 
 
-class FileType(argparse.FileType):
-    def __call__(self, string):
-        """normalize and check exists
-            otherwise magic strings like '-' for stdin resolve to bad paths
-        """
-        norm = normpath(string)
-        return super().__call__(norm if norm.exists() else string)
+def c_source_files(dir_names):
+    """Returns a list of all *.c, *.h, and *.cpp files for a given list of directories
+
+    Args:
+
+        dir_names
+            List of directories, relative pathing starts at qmk's cwd
+    """
+    files = []
+    for dir in dir_names:
+        files.extend(file for file in Path(dir).glob('**/*') if file.suffix in ['.c', '.h', '.cpp'])
+    return files

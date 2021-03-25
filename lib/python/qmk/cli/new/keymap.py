@@ -5,11 +5,10 @@ from pathlib import Path
 
 import qmk.path
 from qmk.decorators import automagic_keyboard, automagic_keymap
-from qmk.keyboard import keyboard_folder
 from milc import cli
 
 
-@cli.argument('-kb', '--keyboard', type=keyboard_folder, help='Specify keyboard name. Example: 1upkeyboards/1up60hse')
+@cli.argument('-kb', '--keyboard', help='Specify keyboard name. Example: 1upkeyboards/1up60hse')
 @cli.argument('-km', '--keymap', help='Specify the name for the new keymap directory')
 @cli.subcommand('Creates a new keymap for the keyboard of your choosing')
 @automagic_keyboard
@@ -30,15 +29,15 @@ def new_keymap(cli):
     # check directories
     if not kb_path.exists():
         cli.log.error('Keyboard %s does not exist!', kb_path)
-        return False
+        exit(1)
 
     if not keymap_path_default.exists():
         cli.log.error('Keyboard default %s does not exist!', keymap_path_default)
-        return False
+        exit(1)
 
     if keymap_path_new.exists():
         cli.log.error('Keymap %s already exists!', keymap_path_new)
-        return False
+        exit(1)
 
     # create user directory with default keymap files
     shutil.copytree(keymap_path_default, keymap_path_new, symlinks=True)
